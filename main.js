@@ -21,13 +21,18 @@ function updateStatus(msg, isError = false) {
     }
 }
 
-// Initialize the scene
-try {
-    init();
-    animate();
-} catch (e) {
-    updateStatus('Critical Error: ' + e.message, true);
-}
+// Initialize the scene after everything is loaded
+window.onload = function () {
+    try {
+        if (typeof THREEx === 'undefined') {
+            throw new Error('AR.js (THREEx) failed to load. Please check your internet connection or try a different browser.');
+        }
+        init();
+        animate();
+    } catch (e) {
+        updateStatus('Critical Error: ' + e.message, true);
+    }
+};
 
 function init() {
     updateStatus('Initializing Scene...');
