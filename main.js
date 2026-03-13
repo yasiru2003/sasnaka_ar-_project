@@ -24,16 +24,18 @@ function updateStatus(msg, isError = false) {
 // Initialize the scene after everything is loaded
 window.onload = function () {
     try {
+        console.log('Checking dependencies...');
         if (typeof THREE === 'undefined') {
-            throw new Error('Three.js failed to load. Please refresh the page.');
+            throw new Error('Three.js core library missing.');
         }
         if (typeof THREEx === 'undefined') {
-            throw new Error('AR.js (THREEx) could not be found. This often happens if the script is blocked by a browser extension (like Brave Shields or AdBlock).');
+            throw new Error('AR.js (THREEx) library missing.');
         }
         init();
         animate();
     } catch (e) {
         updateStatus('Critical Error: ' + e.message, true);
+        document.getElementById('retry-btn').style.display = 'block';
     }
 };
 
