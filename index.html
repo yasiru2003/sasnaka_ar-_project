@@ -8,10 +8,24 @@
     <link rel="stylesheet" href="style.css">
     <!-- Include Three.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <!-- Include AR.js (Specific Version for stability) -->
-    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@master/three.js/build/ar.js"></script>
+
+    <!-- Script Loading Debugger -->
+    <script>
+        window.addEventListener('error', function (e) {
+            var status = document.getElementById('status');
+            if (status) {
+                status.innerText = 'Script Error: ' + e.message;
+                status.style.color = '#ff4444';
+            }
+        }, true);
+        console.log('Three.js version:', THREE ? THREE.REVISION : 'Not Loaded');
+    </script>
+
+    <!-- Include AR.js (Stable Version from unpkg) -->
+    <script src="https://unpkg.com/@ar-js-org/ar.js@3.4.5/three.js/build/ar.js"></script>
+
     <!-- Include GLTFLoader -->
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/js/loaders/GLTFLoader.js"></script>
 </head>
 
 <body style='margin : 0px; overflow: hidden;'>
