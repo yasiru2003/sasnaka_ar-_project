@@ -11,11 +11,27 @@ let stage, dancer, microphone;
 let mixer; // Animation mixer for the dancer
 let floatingObjects = [];
 
+const statusElement = document.getElementById('status');
+
+function updateStatus(msg, isError = false) {
+    statusElement.innerText = msg;
+    if (isError) {
+        statusElement.style.color = '#ff4444';
+        console.error(msg);
+    }
+}
+
 // Initialize the scene
-init();
-animate();
+try {
+    init();
+    animate();
+} catch (e) {
+    updateStatus('Critical Error: ' + e.message, true);
+}
 
 function init() {
+    updateStatus('Initializing Scene...');
+
     // 1. Setup Scene, Camera, Renderer
     scene = new THREE.Scene();
 
@@ -39,6 +55,8 @@ function init() {
 
     clock = new THREE.Clock();
 
+    updateStatus('Setting up Camera...');
+
     // 2. Setup AR.js toolkit
     arToolkitSource = new THREEx.ArToolkitSource({
         sourceType: 'webcam',
@@ -53,7 +71,10 @@ function init() {
     }
 
     arToolkitSource.init(function onReady() {
+        updateStatus('Camera Source Ready');
         onResize();
+    }, function onError(err) {
+        updateStatus('Camera Error: ' + err, true);
     });
 
     window.addEventListener('resize', function () {
@@ -65,7 +86,9 @@ function init() {
         detectionMode: 'mono',
     });
 
+    updateStatus('Initializing AR Context...');
     arToolkitContext.init(function onCompleted() {
+        updateStatus('AR Context Initialized');
         camera.projectionMatrix.copy(arToolkitContext.getProjectionMatrix());
     });
 
@@ -74,11 +97,12 @@ function init() {
     scene.add(markerRoot);
 
     // Using the Hiro marker for now (default)
-    // To use a custom marker, replace this with markerType: 'pattern' and patternUrl: 'markers/pattern-talent-marker.patt'
     let markerControls = new THREEx.ArMarkerControls(arToolkitContext, markerRoot, {
         type: 'pattern',
         patternUrl: 'https://raw.githack.com/AR-js-org/AR.js/master/data/data/patt.hiro',
     });
+
+    updateStatus('Loading 3D Models...');
 
     // 4. Load Models
     const loader = new THREE.GLTFLoader();
@@ -88,7 +112,6 @@ function init() {
         stage = gltf.scene;
         stage.scale.set(0.5, 0.5, 0.5);
         markerRoot.add(stage);
-        document.getElementById('status').innerText = 'Stage Loaded';
     }, undefined, (error) => {
         console.warn('Placeholder: stage.glb not found. Creating a temporary cube.');
         createPlaceholderStage();
@@ -138,7 +161,11 @@ function init() {
     window.addEventListener('click', onDocumentMouseDown, false);
     window.addEventListener('touchstart', onDocumentTouchStart, false);
 
-    document.getElementById('status').innerText = 'AR Ready! Point at Hiro Marker.';
+    // Final Setup Status
+    setTimeout(() => {
+        if (statusElement.innerText.includes('Error')) return;
+        updateStatus('AR Ready! Point at Hiro Marker.');
+    }, 2000);
 }
 
 function createPlaceholderStage() {
@@ -197,7 +224,6 @@ function checkIntersection() {
 
     if (intersects.length > 0) {
         let object = intersects[0].object;
-        // Check if the clicked object is the microphone or a parent of it
         let isMicrophone = false;
         object.traverseAncestors((ancestor) => {
             if (ancestor === microphone) isMicrophone = true;
@@ -230,11 +256,13 @@ function animate() {
     // Pulse microphone
     if (microphone) {
         const scale = 1 + Math.sin(Date.now() * 0.005) * 0.1;
-        // Handle both grouped GLTF and simple placeholder Mesh
-        if (microphone.scale.set) {
+        if (microphone.scale.set && typeof microphone.scale.set === 'function') {
             microphone.scale.set(scale * 0.1, scale * 0.1, scale * 0.1);
+        } else if (microphone.scale) {
+            microphone.scale.x = microphone.scale.y = microphone.scale.z = scale * 1.0;
         }
     }
 
     renderer.render(scene, camera);
 }
+
