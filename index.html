@@ -24,6 +24,7 @@
             align-items: center;
             color: white;
             font-family: sans-serif;
+            text-align: center;
         }
 
         button {
@@ -44,13 +45,13 @@
     <!-- User Interaction Screen -->
     <div id="start-screen">
         <h1>Sasnaka Talent AR</h1>
-        <p>Ensure your Hiro marker is ready.</p>
-        <button id="start-btn">Tap to Start Camera</button>
+        <p>1. Point your phone at a Hiro marker.<br>2. Allow Camera Access when prompted.</p>
+        <button id="start-btn">Let's Go!</button>
     </div>
 
-    <!-- A-Frame Scene (Initially hidden or paused) -->
-    <a-scene id="ar-scene" vr-mode-ui="enabled: false;" arjs="sourceType: webcam; debugUIEnabled: false;"
-        renderer="antialias: true; alpha: true" style="display: none;">
+    <!-- A-Frame Scene (MUST be visible to initialize camera instantly) -->
+    <a-scene vr-mode-ui="enabled: false;" arjs="sourceType: webcam; debugUIEnabled: false;"
+        renderer="antialias: true; alpha: true">
 
         <!-- Assets pre-loading -->
         <a-assets>
@@ -99,10 +100,8 @@
 
     <script>
         document.getElementById('start-btn').addEventListener('click', function () {
-            // Hide start screen
+            // Simply hide the overlay. The A-Scene handles its own camera permissions natively.
             document.getElementById('start-screen').style.display = 'none';
-            // Show A-Frame scene, which will trigger the camera permission prompt
-            document.getElementById('ar-scene').style.display = 'block';
         });
 
         // Click interaction for Microphone
