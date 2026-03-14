@@ -7,20 +7,23 @@
     <title>Sasnaka Talent AR</title>
     <link rel="stylesheet" href="style.css">
     <!-- Include Three.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" crossorigin="anonymous"></script>
 
     <!-- Include GLTFLoader -->
-    <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/js/loaders/GLTFLoader.js"
+        crossorigin="anonymous"></script>
 
-    <!-- Include AR.js (Official GitHub Hosted - Most Reliable) -->
-    <script src="https://ar-js-org.github.io/AR.js/three.js/build/ar.js?v=4"></script>
+    <!-- Include AR.js (Official) -->
+    <script src="https://ar-js-org.github.io/AR.js/three.js/build/ar.js" crossorigin="anonymous"></script>
 
     <script>
         // Diagnostic Logger
         window.onerror = function (msg, url, lineNo, columnNo, error) {
             var status = document.getElementById('status');
             if (status) {
-                status.innerHTML = 'Error: ' + msg + '<br><small>Line: ' + lineNo + '</small>';
+                var detailedError = msg;
+                if (url) detailedError += '<br><small>Source: ' + url.split('/').pop() + '</small>';
+                status.innerHTML = 'Error: ' + detailedError;
                 status.style.color = '#ff4444';
             }
             return false;
@@ -38,7 +41,7 @@
             Refresh App</button>
     </div>
 
-    <script src="main.js?v=4"></script>
+    <script src="main.js?v=5" crossorigin="anonymous"></script>
 </body>
 
 </html>
