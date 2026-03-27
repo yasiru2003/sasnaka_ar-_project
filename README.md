@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sasnaka Sansada Talent Show Portal
 
-## Getting Started
+A premium, cinematic registration and entry submission portal for the Sasnaka Sansada Talent Show. Featuring a high-end "2.5D" theatre aesthetic with immersive animations and a seamless user journey.
 
-First, run the development server:
+## 🎭 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Cinematic Theatre Experience**: Immersive animations with curtains, spotlights, and floating dust (Framer Motion).
+- **Advanced Category Navigation**: Staggered "orchestra-like" UI for viewing performance categories (Singing, Dancing, Acting, etc.).
+- **Smart User Journey**: 
+  - **See Details**: Learn about prizes, rules, and categories.
+  - **Register**: Quick and elegant registration form.
+  - **Flexible Entry**: Choice to "Upload Talent Now" or "Upload Later".
+- **Database Integration**: Full backend integration with Neon PostgreSQL via Prisma ORM.
+- **Mobile Responsive**: Perfectly optimized for all screen sizes, maintaining a premium feel on mobile.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Frontend**: Next.js 15, React 19, Framer Motion, Lucide React
+- **Styling**: Vanilla CSS (Modern custom design system)
+- **Database**: Prisma ORM, Neon (PostgreSQL)
+- **Language**: TypeScript
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Getting Started
 
-## Learn More
+### Prerequisites
+- Node.js 18+
+- A Neon PostgreSQL account (or any PostgreSQL instance)
 
-To learn more about Next.js, take a look at the following resources:
+### Installation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yasiru2003/sasnaka_ar-_project.git
+   cd sasnaka_ar-_project
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-## Deploy on Vercel
+3. Set up environment variables:
+   Create a `.env` file in the root directory:
+   ```env
+   DATABASE_URL="your_postgresql_connection_string"
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. Initialize the database:
+   ```bash
+   npx prisma generate
+   npx prisma db push
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+5. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+Open [http://localhost:3000](http://localhost:3000) to see the result.
+
+## 📱 Mobile Preview
+Designed to feel like a premium app on mobile devices with touch-friendly interactions and a responsive layout.
+
+---
+Built with ❤️ for Sasnaka Sansada.
