@@ -9,7 +9,11 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@prisma/client": "^7.5.0",
+    "framer-motion": "latest",
+    "lucide-react": "latest",
     "next": "16.2.1",
+    "prisma": "^7.5.0",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },
@@ -17,6 +21,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv": "^17.3.1",
     "eslint": "^9",
     "eslint-config-next": "16.2.1",
     "typescript": "^5"

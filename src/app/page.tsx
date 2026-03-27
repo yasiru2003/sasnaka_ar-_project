@@ -1,66 +1,219 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
+
+import { useState } from 'react';
+import Theatre from '@/components/Theatre';
+import { motion, AnimatePresence } from 'framer-motion';
+import RegistrationModal from '@/components/RegistrationModal';
+import UploadModal from '@/components/UploadModal';
+import DetailsModal from '@/components/DetailsModal';
 
 export default function Home() {
+  const [activeModal, setActiveModal] = useState<'details' | 'register' | 'upload' | null>(null);
+  const [prefilledEmail, setPrefilledEmail] = useState('');
+
+  const handleRegisterFromDetails = () => {
+    setActiveModal('register');
+  };
+
+  const handleUploadNow = (email: string) => {
+    setPrefilledEmail(email);
+    setActiveModal('upload');
+  };
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <main>
+      <Theatre>
+        <div style={{
+          textAlign: 'center',
+          maxWidth: '800px',
+          padding: '0 20px'
+        }}>
+          {/* Logo */}
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 6.5, duration: 1 }}
+            style={{
+              width: '180px', // Enlarged for the new logo
+              height: 'auto',
+              margin: '0 auto 40px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
           >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+            <img 
+              src="/images/sasnaka-logo.png" 
+              alt="Sasnaka Logo" 
+              style={{
+                width: '100%',
+                height: 'auto',
+                filter: 'drop-shadow(0 0 20px rgba(0, 195, 255, 0.3))' // Cyan glow matching the logo
+              }}
             />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          </motion.div>
+
+          <motion.h2
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 7, duration: 0.8 }}
+            style={{
+              fontSize: '1.2rem',
+              letterSpacing: '0.4em',
+              textTransform: 'uppercase',
+              color: 'var(--theatre-gold)',
+              marginBottom: '10px',
+              fontWeight: 300
+            }}
           >
-            Documentation
-          </a>
+            Welcome to the Official Registration Portal
+          </motion.h2>
+
+          <motion.h1
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 7.2, duration: 0.8 }}
+            style={{
+              fontSize: 'clamp(2.5rem, 8vw, 4.5rem)',
+              fontWeight: 800,
+              marginBottom: '40px',
+              lineHeight: 1.1,
+              background: 'linear-gradient(to bottom, #ffffff 50%, #c5a059 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              textShadow: '0 10px 30px rgba(0,0,0,0.5)'
+            }}
+          >
+            SASNAKA SANSADA <br /> TALENT SHOW
+          </motion.h1>
+
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 7.5, duration: 0.8 }}
+            style={{
+              display: 'flex',
+              gap: '20px',
+              justifyContent: 'center',
+              flexWrap: 'wrap'
+            }}
+          >
+            <button 
+              onClick={() => setActiveModal('details')}
+              style={{
+                padding: '16px 40px',
+                fontSize: '1rem',
+                fontWeight: 'bold',
+                textTransform: 'uppercase',
+                letterSpacing: '0.1em',
+                backgroundColor: 'transparent',
+                color: '#fff',
+                border: '2px solid rgba(255,255,255,0.2)',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                transition: 'background-color 0.2s, border-color 0.2s'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.05)';
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.8)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)';
+              }}
+            >
+              See Details
+            </button>
+            <button 
+              onClick={() => setActiveModal('register')}
+              className="pulse-gold"
+              style={{
+                padding: '16px 40px',
+                fontSize: '1rem',
+                fontWeight: 'bold',
+                textTransform: 'uppercase',
+                letterSpacing: '0.1em',
+                backgroundColor: 'var(--theatre-gold)',
+                color: '#000',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                transition: 'transform 0.2s, box-shadow 0.2s',
+                position: 'relative',
+                overflow: 'hidden'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 15px 30px rgba(197, 160, 89, 0.5)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 10px 20px rgba(197, 160, 89, 0.3)';
+              }}
+            >
+              <div className="shimmer-bg" style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }} />
+              Register Now
+            </button>
+            <button 
+              onClick={() => {
+                setPrefilledEmail('');
+                setActiveModal('upload');
+              }}
+              style={{
+                padding: '16px 40px',
+                fontSize: '1rem',
+                fontWeight: 'bold',
+                textTransform: 'uppercase',
+                letterSpacing: '0.1em',
+                backgroundColor: 'transparent',
+                color: '#fff',
+                border: '2px solid rgba(255,255,255,0.2)',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                transition: 'background-color 0.2s, border-color 0.2s'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.05)';
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.8)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)';
+              }}
+            >
+              Login / Upload
+            </button>
+          </motion.div>
         </div>
-      </main>
-    </div>
+      </Theatre>
+
+      <AnimatePresence>
+        {activeModal === 'details' && (
+          <DetailsModal 
+            isOpen={true} 
+            onClose={() => setActiveModal(null)} 
+            onRegister={handleRegisterFromDetails}
+          />
+        )}
+        {activeModal === 'register' && (
+          <RegistrationModal 
+            isOpen={true} 
+            onClose={() => setActiveModal(null)} 
+            onUploadNow={handleUploadNow}
+          />
+        )}
+        {activeModal === 'upload' && (
+          <UploadModal 
+            isOpen={true} 
+            onClose={() => setActiveModal(null)} 
+            initialEmail={prefilledEmail}
+          />
+        )}
+      </AnimatePresence>
+
+      <style jsx global>{`
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;800&display=swap');
+      `}</style>
+    </main>
   );
 }

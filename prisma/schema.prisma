@@ -1,0 +1,16 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Participant {
+  id              String   @id @default(uuid())
+  name            String
+  email           String   @unique
+  category        String
+  entry_video_url String?
+  created_at      DateTime @default(now())
+}
