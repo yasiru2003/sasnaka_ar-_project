@@ -19,12 +19,12 @@ const CategoryCard = ({ icon: Icon, title, description, index }: { icon: any, ti
     }}
     whileHover={{ scale: 1.02, backgroundColor: 'rgba(197, 160, 89, 0.08)' }}
     style={{
-      padding: '16px',
+      padding: '14px',
       backgroundColor: 'rgba(255, 255, 255, 0.03)',
       border: '1px solid rgba(197, 160, 89, 0.15)',
       borderRadius: '8px',
       display: 'flex',
-      gap: '16px',
+      gap: '12px',
       alignItems: 'center',
       cursor: 'default',
       transition: 'border-color 0.3s'
@@ -33,8 +33,9 @@ const CategoryCard = ({ icon: Icon, title, description, index }: { icon: any, ti
     onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'rgba(197, 160, 89, 0.15)')}
   >
     <div style={{
-      width: '40px',
-      height: '40px',
+      width: '36px',
+      height: '36px',
+      flexShrink: 0,
       borderRadius: '50%',
       backgroundColor: 'rgba(197, 160, 89, 0.1)',
       display: 'flex',
@@ -42,11 +43,11 @@ const CategoryCard = ({ icon: Icon, title, description, index }: { icon: any, ti
       justifyContent: 'center',
       color: 'var(--theatre-gold)'
     }}>
-      <Icon size={20} />
+      <Icon size={18} />
     </div>
-    <div>
-      <h4 style={{ color: 'var(--theatre-gold)', margin: 0, fontSize: '1rem', letterSpacing: '0.05em' }}>{title}</h4>
-      <p style={{ color: 'rgba(255, 255, 255, 0.6)', margin: '4px 0 0', fontSize: '0.85rem' }}>{description}</p>
+    <div style={{ overflow: 'hidden' }}>
+      <h4 style={{ color: 'var(--theatre-gold)', margin: 0, fontSize: '0.95rem', letterSpacing: '0.05em' }}>{title}</h4>
+      <p style={{ color: 'rgba(255, 255, 255, 0.6)', margin: '2px 0 0', fontSize: '0.8rem', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>{description}</p>
     </div>
   </motion.div>
 );

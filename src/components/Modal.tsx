@@ -31,14 +31,15 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
         animate={{ scale: 1, opacity: 1, y: 0 }}
         exit={{ scale: 0.9, opacity: 0, y: 20 }}
         style={{
-          width: '100%',
-          maxWidth: '500px',
+          width: 'min(95%, 500px)',
           backgroundColor: '#0a0a0a',
           border: '1px solid var(--theatre-gold)',
           borderRadius: '8px',
-          padding: '40px',
+          padding: 'var(--modal-padding, 40px)',
           position: 'relative',
-          boxShadow: '0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px var(--theatre-gold-glow)'
+          boxShadow: '0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px var(--theatre-gold-glow)',
+          maxHeight: '90vh',
+          overflowY: 'auto'
         }}
       >
         <button

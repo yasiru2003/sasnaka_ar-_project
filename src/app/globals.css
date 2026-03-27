@@ -113,3 +113,31 @@ body {
 .pulse-gold {
   animation: pulse-gold 2s infinite;
 }
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  :root {
+    --modal-padding: 24px;
+  }
+
+  .theatre-container {
+    padding: 20px;
+    align-items: flex-start;
+    padding-top: 15vh;
+  }
+
+  .spotlight {
+    width: 200vmax;
+    height: 200vmax;
+  }
+
+  /* Typography scale for small screens */
+  h1 { font-size: 2.5rem !important; }
+  h2 { font-size: 1rem !important; letter-spacing: 0.2em !important; }
+}
+
+@media (max-width: 480px) {
+  .theatre-container {
+    padding-top: 10vh;
+  }
+}

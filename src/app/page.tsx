@@ -34,9 +34,9 @@ export default function Home() {
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 6.5, duration: 1 }}
             style={{
-              width: '180px', // Enlarged for the new logo
+              width: 'min(180px, 45vw)', // Smaller logo on mobile
               height: 'auto',
-              margin: '0 auto 40px',
+              margin: '0 auto 30px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center'
@@ -48,7 +48,7 @@ export default function Home() {
               style={{
                 width: '100%',
                 height: 'auto',
-                filter: 'drop-shadow(0 0 20px rgba(0, 195, 255, 0.3))' // Cyan glow matching the logo
+                filter: 'drop-shadow(0 0 20px rgba(0, 195, 255, 0.3))'
               }}
             />
           </motion.div>
@@ -76,7 +76,7 @@ export default function Home() {
             style={{
               fontSize: 'clamp(2.5rem, 8vw, 4.5rem)',
               fontWeight: 800,
-              marginBottom: '40px',
+              marginBottom: '30px',
               lineHeight: 1.1,
               background: 'linear-gradient(to bottom, #ffffff 50%, #c5a059 100%)',
               WebkitBackgroundClip: 'text',
@@ -93,16 +93,18 @@ export default function Home() {
             transition={{ delay: 7.5, duration: 0.8 }}
             style={{
               display: 'flex',
-              gap: '20px',
+              gap: '15px',
               justifyContent: 'center',
-              flexWrap: 'wrap'
+              flexWrap: 'wrap',
+              margin: '0 auto',
+              maxWidth: '100%'
             }}
           >
             <button 
               onClick={() => setActiveModal('details')}
               style={{
-                padding: '16px 40px',
-                fontSize: '1rem',
+                padding: '14px 30px',
+                fontSize: '0.9rem',
                 fontWeight: 'bold',
                 textTransform: 'uppercase',
                 letterSpacing: '0.1em',
@@ -111,7 +113,8 @@ export default function Home() {
                 border: '2px solid rgba(255,255,255,0.2)',
                 borderRadius: '4px',
                 cursor: 'pointer',
-                transition: 'background-color 0.2s, border-color 0.2s'
+                transition: 'background-color 0.2s, border-color 0.2s',
+                minWidth: '200px'
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.05)';
@@ -128,8 +131,8 @@ export default function Home() {
               onClick={() => setActiveModal('register')}
               className="pulse-gold"
               style={{
-                padding: '16px 40px',
-                fontSize: '1rem',
+                padding: '14px 30px',
+                fontSize: '0.9rem',
                 fontWeight: 'bold',
                 textTransform: 'uppercase',
                 letterSpacing: '0.1em',
@@ -140,7 +143,8 @@ export default function Home() {
                 cursor: 'pointer',
                 transition: 'transform 0.2s, box-shadow 0.2s',
                 position: 'relative',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                minWidth: '200px'
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-2px)';
@@ -160,8 +164,8 @@ export default function Home() {
                 setActiveModal('upload');
               }}
               style={{
-                padding: '16px 40px',
-                fontSize: '1rem',
+                padding: '14px 30px',
+                fontSize: '0.9rem',
                 fontWeight: 'bold',
                 textTransform: 'uppercase',
                 letterSpacing: '0.1em',
@@ -170,7 +174,8 @@ export default function Home() {
                 border: '2px solid rgba(255,255,255,0.2)',
                 borderRadius: '4px',
                 cursor: 'pointer',
-                transition: 'background-color 0.2s, border-color 0.2s'
+                transition: 'background-color 0.2s, border-color 0.2s',
+                minWidth: '200px'
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.05)';
