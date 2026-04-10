@@ -84,7 +84,18 @@ export default function Home() {
               textShadow: '0 10px 30px rgba(0,0,0,0.5)'
             }}
           >
-            ZENTAGE 2026 <br /> <span style={{ fontSize: '0.5em', letterSpacing: '0.3em', opacity: 0.8 }}>SASNAKA SANSADA TALENT SHOW</span>
+            ZENTAGE 2026 <br /> 
+            <span style={{ fontSize: '0.5em', letterSpacing: '0.3em', opacity: 0.8 }}>SASNAKA SANSADA TALENT SHOW</span>
+            <div style={{ 
+              fontSize: '0.35em', 
+              letterSpacing: '0.5em', 
+              marginTop: '15px', 
+              color: 'var(--theatre-gold)', 
+              fontWeight: 400,
+              textTransform: 'uppercase'
+            }}>
+              Where Vintage meets GenZ
+            </div>
           </motion.h1>
 
           <motion.div
