@@ -78,30 +78,26 @@ const DetailsModal: React.FC<DetailsModalProps> = ({ isOpen, onClose, onRegister
         style={{ maxHeight: '65vh', overflowY: 'auto', paddingRight: '15px' }}
       >
         <motion.div variants={itemVariants} style={{ marginBottom: '32px' }}>
-          <p style={{ 
-            color: 'rgba(255, 255, 255, 0.8)', 
-            fontSize: '1rem', 
-            lineHeight: '1.7',
-            textAlign: 'center',
-            fontStyle: 'italic'
+          <div style={{ 
+            color: 'rgba(255, 255, 255, 0.9)', 
+            fontSize: '1.1rem', 
+            lineHeight: '1.8',
+            textAlign: 'left',
+            padding: '24px',
+            backgroundColor: 'rgba(255, 255, 255, 0.03)',
+            borderRadius: '12px',
+            border: '1px solid rgba(197, 160, 89, 0.15)',
+            boxShadow: 'inset 0 0 20px rgba(0,0,0,0.2)'
           }}>
-            "Ensuring strong ground-level branding and island-wide awareness. Join the legacy of Zentage 2026."
-          </p>
-        </motion.div>
-
-        <motion.div variants={itemVariants} style={{ marginBottom: '32px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-            <Star size={18} color="var(--theatre-gold)" />
-            <h3 style={{ color: 'var(--theatre-gold)', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '0.15em', margin: 0 }}>
-              Performance Categories
-            </h3>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '12px' }}>
-            <CategoryCard icon={Accessibility} title="Traditional Dance" description="Solo or group traditional Sri Lankan dance acts." index={0} />
-            <CategoryCard icon={User} title="Contemporary Dance & Drama" description="Modern dance, ballet, acting, or theatrical sketches." index={1} />
-            <CategoryCard icon={Mic2} title="Vocal" description="Solo or group singing performances across all genres." index={2} />
-            <CategoryCard icon={Music} title="Instruments" description="Showcase your mastery over any musical instrument." index={3} />
-            <CategoryCard icon={BookOpen} title="Registration" description="Register online | Get your assigned ID | Upload later." index={4} />
+            <p style={{ marginBottom: '16px' }}>
+              <span style={{ color: 'var(--theatre-gold)', fontWeight: 'bold' }}>Sasnaka Sansada Talent Show 2026</span>, titled <span style={{ color: 'var(--theatre-gold)', fontWeight: 'bold' }}>ZENTAGE</span>, is a groundbreaking cultural event that brings together tradition and modern creativity on one stage.
+            </p>
+            <p style={{ marginBottom: '16px' }}>
+              Building on the success of past events, it creates a powerful platform for youth to showcase talents in dancing, music, and performance. 
+            </p>
+            <p style={{ marginBottom: '0' }}>
+              By blending a traditional mindset with a new-age creative vision, this show highlights the <span style={{ fontStyle: 'italic', color: 'var(--theatre-gold)' }}>“Unseen Legacy”</span> of heritage while inspiring innovation, unity, and artistic expression for a new generation.
+            </p>
           </div>
         </motion.div>
 
