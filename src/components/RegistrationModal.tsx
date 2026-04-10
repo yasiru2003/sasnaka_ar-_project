@@ -15,7 +15,7 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen, onClose, 
     name: '',
     phone: '',
     district: '',
-    category: 'Traditional Dance'
+    category: [] as string[]
   });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -200,21 +200,45 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen, onClose, 
             </select>
           </div>
 
-          <div>
-            <label style={labelStyle}>Performance Category</label>
-            <select
-              style={inputStyle}
-              value={formData.category}
-              onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-              onFocus={(e) => e.target.style.borderColor = 'var(--theatre-gold)'}
-              onBlur={(e) => e.target.style.borderColor = 'rgba(197, 160, 89, 0.3)'}
-            >
-              <option value="Traditional Dance" style={{ backgroundColor: '#1a1a1a', color: '#fff' }}>Traditional Dance</option>
-              <option value="Contemporary Dance & Drama" style={{ backgroundColor: '#1a1a1a', color: '#fff' }}>Contemporary Dance & Drama</option>
-              <option value="Vocal" style={{ backgroundColor: '#1a1a1a', color: '#fff' }}>Vocal</option>
-              <option value="Instruments" style={{ backgroundColor: '#1a1a1a', color: '#fff' }}>Instruments</option>
-              <option value="Other" style={{ backgroundColor: '#1a1a1a', color: '#fff' }}>Other</option>
-            </select>
+          <div style={{ marginBottom: '20px' }}>
+            <label style={labelStyle}>Performance Category (Select all that apply)</label>
+            <div style={{ 
+              display: 'grid', 
+              gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', 
+              gap: '10px',
+              backgroundColor: 'rgba(255, 255, 255, 0.05)',
+              padding: '15px',
+              borderRadius: '4px',
+              border: '1px solid rgba(197, 160, 89, 0.3)'
+            }}>
+              {["Traditional Dance", "Contemporary Dance & Drama", "Vocal", "Instruments", "Other"].map(cat => (
+                <label key={cat} style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '10px', 
+                  cursor: 'pointer',
+                  color: 'rgba(255,255,255,0.8)',
+                  fontSize: '0.85rem'
+                }}>
+                  <input
+                    type="checkbox"
+                    checked={formData.category.includes(cat)}
+                    onChange={(e) => {
+                      const newCats = e.target.checked 
+                        ? [...formData.category, cat]
+                        : formData.category.filter(c => c !== cat);
+                      setFormData({ ...formData, category: newCats });
+                    }}
+                    style={{ 
+                      accentColor: 'var(--theatre-gold)',
+                      width: '16px',
+                      height: '16px'
+                    }}
+                  />
+                  {cat}
+                </label>
+              ))}
+            </div>
           </div>
 
           <button

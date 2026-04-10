@@ -24,7 +24,7 @@ interface Participant {
   name: string;
   phone: string;
   district: string;
-  category: string;
+  category: string[];
   entry_video_url: string | null;
   created_at: string;
 }
@@ -78,14 +78,14 @@ export default function AdminDashboard() {
         p.phone.toLowerCase().includes(searchTerm.toLowerCase()) ||
         p.registrationNumber.toLowerCase().includes(searchTerm.toLowerCase());
       
-      const matchesCategory = categoryFilter === 'All' || p.category === categoryFilter;
+      const matchesCategory = categoryFilter === 'All' || p.category.includes(categoryFilter);
       
       return matchesSearch && matchesCategory;
     });
   }, [participants, searchTerm, categoryFilter]);
 
   const categories = useMemo(() => {
-    const cats = new Set(participants.map(p => p.category));
+    const cats = new Set(participants.flatMap(p => p.category));
     return ['All', ...Array.from(cats)];
   }, [participants]);
 
@@ -96,7 +96,7 @@ export default function AdminDashboard() {
       p.name,
       p.phone,
       p.district,
-      p.category,
+      p.category.join('; '),
       p.entry_video_url || 'N/A',
       new Date(p.created_at).toLocaleDateString()
     ]);
@@ -262,8 +262,8 @@ export default function AdminDashboard() {
           {[
             { label: 'Total Registrations', value: participants.length, icon: Users, color: 'var(--theatre-gold)' },
             { label: 'Uploaded Entries', value: participants.filter(p => p.entry_video_url).length, icon: Video, color: '#44ff44' },
-            { label: 'Traditional Dance', value: participants.filter(p => p.category === 'Traditional Dance').length, icon: CheckCircle2, color: '#44ccff' },
-            { label: 'Other Categories', value: participants.filter(p => p.category !== 'Traditional Dance').length, icon: CheckCircle2, color: '#ffcc44' },
+            { label: 'Traditional Dance', value: participants.filter(p => p.category.includes('Traditional Dance')).length, icon: CheckCircle2, color: '#44ccff' },
+            { label: 'Other Categories', value: participants.filter(p => !p.category.includes('Traditional Dance')).length, icon: CheckCircle2, color: '#ffcc44' },
           ].map((stat, i) => (
             <motion.div
               key={i}
@@ -457,7 +457,7 @@ export default function AdminDashboard() {
                           color: 'var(--theatre-gold)',
                           border: '1px solid rgba(197, 160, 89, 0.2)'
                         }}>
-                          {p.category}
+                          {p.category.join(', ')}
                         </span>
                       </td>
                       <td style={{ padding: '16px 20px', color: 'rgba(255,255,255,0.8)' }}>{p.district}</td>

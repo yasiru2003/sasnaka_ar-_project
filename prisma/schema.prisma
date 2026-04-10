@@ -12,7 +12,7 @@ model Participant {
   name               String
   phone              String   @unique
   district           String
-  category           String
+  category           String[]
   entry_video_url    String?
   created_at         DateTime @default(now())
 }

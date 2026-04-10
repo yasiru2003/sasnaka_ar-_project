@@ -5,9 +5,9 @@ export async function POST(req: Request) {
   try {
     const { registrationNumber: providedRegNo, name, phone, district, category } = await req.json();
 
-    if (!name || !phone || !district || !category) {
+    if (!name || !phone || !district || !Array.isArray(category) || category.length === 0) {
       return NextResponse.json(
-        { error: 'Missing required fields' },
+        { error: 'Missing required fields or category selection' },
         { status: 400 }
       );
     }
@@ -21,7 +21,7 @@ export async function POST(req: Request) {
         name,
         phone,
         district,
-        category,
+        category, // This is now an array
       },
     });
 
