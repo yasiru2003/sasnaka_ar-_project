@@ -99,8 +99,12 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen, onClose, 
             <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.8rem', textTransform: 'uppercase', marginBottom: '5px' }}>Your Assigned Registration No:</p>
             <p style={{ color: 'var(--theatre-gold)', fontSize: '1.8rem', fontWeight: '900', letterSpacing: '0.1em' }}>{assignedRegNo}</p>
           </div>
-          <p style={{ color: 'rgba(255, 255, 255, 0.7)', marginBottom: '30px', fontSize: '0.9rem' }}>
-            Please **save this number**. You will need it along with your phone number to upload your talent video.
+          <p style={{ color: 'rgba(255, 255, 255, 0.9)', marginBottom: '30px', fontSize: '1rem', fontWeight: 'bold' }}>
+            🔔 Please **TAKE A SCREENSHOT** or **SAVE THIS NUMBER**. 
+            <br />
+            <span style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.6)', fontWeight: 'normal' }}>
+              You will need it along with your phone number to upload your talent video.
+            </span>
           </p>
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>

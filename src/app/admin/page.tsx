@@ -14,7 +14,8 @@ import {
   RefreshCcw,
   CheckCircle2,
   AlertCircle,
-  QrCode
+  QrCode,
+  Trash2
 } from 'lucide-react';
 import AdminQRCode from '@/components/AdminQRCode';
 
@@ -68,6 +69,25 @@ export default function AdminDashboard() {
       setError(null);
     } else {
       setError('Invalid password');
+    }
+  };
+
+  const handleDelete = async (id: string, name: string) => {
+    if (!window.confirm(`Are you sure you want to delete the record for ${name}? This action is permanent.`)) {
+      return;
+    }
+    
+    try {
+      const res = await fetch(`/api/admin/participants/${id}`, {
+        method: 'DELETE'
+      });
+      
+      if (!res.ok) throw new Error('Failed to delete');
+      
+      // Update local state
+      setParticipants(prev => prev.filter(p => p.id !== id));
+    } catch (err: any) {
+      alert(err.message);
     }
   };
 
@@ -424,7 +444,7 @@ export default function AdminDashboard() {
             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '800px' }}>
               <thead style={{ backgroundColor: 'rgba(255,255,255,0.03)' }}>
                 <tr>
-                  {['Reg No', 'Participant Name', 'Category', 'District', 'Video Link', 'Registered'].map(h => (
+                  {['Reg No', 'Participant Name', 'Category', 'District', 'Video Link', 'Registered', 'Actions'].map(h => (
                     <th key={h} style={{ padding: '16px 20px', color: 'rgba(255,255,255,0.5)', fontSize: '0.8rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{h}</th>
                   ))}
                 </tr>
@@ -484,6 +504,33 @@ export default function AdminDashboard() {
                       </td>
                       <td style={{ padding: '16px 20px', color: 'rgba(255,255,255,0.4)', fontSize: '0.85rem' }}>
                         {new Date(p.created_at).toLocaleDateString()}
+                      </td>
+                      <td style={{ padding: '16px 20px' }}>
+                        <button
+                          onClick={() => handleDelete(p.id, p.name)}
+                          style={{
+                            padding: '8px',
+                            backgroundColor: 'rgba(255,68,68,0.1)',
+                            border: '1px solid rgba(255,68,68,0.2)',
+                            borderRadius: '6px',
+                            color: '#ff4444',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            transition: 'all 0.2s'
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.backgroundColor = 'rgba(255,68,68,0.2)';
+                            e.currentTarget.style.transform = 'scale(1.1)';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.backgroundColor = 'rgba(255,68,68,0.1)';
+                            e.currentTarget.style.transform = 'scale(1)';
+                          }}
+                        >
+                          <Trash2 size={16} />
+                        </button>
                       </td>
                     </motion.tr>
                   ))}
