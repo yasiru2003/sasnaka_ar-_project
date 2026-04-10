@@ -13,14 +13,16 @@ import {
   ArrowRight,
   RefreshCcw,
   CheckCircle2,
-  AlertCircle
+  AlertCircle,
+  QrCode
 } from 'lucide-react';
+import AdminQRCode from '@/components/AdminQRCode';
 
 interface Participant {
   id: string;
   registrationNumber: string;
   name: string;
-  email: string;
+  phone: string;
   district: string;
   category: string;
   entry_video_url: string | null;
@@ -73,7 +75,7 @@ export default function AdminDashboard() {
     return participants.filter(p => {
       const matchesSearch = 
         p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        p.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        p.phone.toLowerCase().includes(searchTerm.toLowerCase()) ||
         p.registrationNumber.toLowerCase().includes(searchTerm.toLowerCase());
       
       const matchesCategory = categoryFilter === 'All' || p.category === categoryFilter;
@@ -88,11 +90,11 @@ export default function AdminDashboard() {
   }, [participants]);
 
   const exportToCSV = () => {
-    const headers = ['Reg No', 'Name', 'Email', 'District', 'Category', 'Video URL', 'Date'];
+    const headers = ['Reg No', 'Name', 'Phone', 'District', 'Category', 'Video URL', 'Date'];
     const rows = filteredParticipants.map(p => [
       p.registrationNumber,
       p.name,
-      p.email,
+      p.phone,
       p.district,
       p.category,
       p.entry_video_url || 'N/A',
@@ -298,6 +300,53 @@ export default function AdminDashboard() {
           ))}
         </div>
 
+        {/* Marketing Assets & QR Code */}
+        <div style={{ marginBottom: '40px' }}>
+          <h2 style={{ color: '#fff', fontSize: '1.2rem', marginBottom: '20px', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+            Marketing Assets
+          </h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '20px' }}>
+            <AdminQRCode 
+              url="https://sasnaka-ar-project-kuio.vercel.app/" 
+              logoPath="/images/sasnaka-logo.png" 
+            />
+            <div style={{ 
+              backgroundColor: 'rgba(255,255,255,0.02)', 
+              border: '1px solid rgba(255,255,255,0.05)', 
+              borderRadius: '16px',
+              padding: '30px',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center'
+            }}>
+              <h3 style={{ color: 'var(--theatre-gold)', marginBottom: '15px' }}>Public Access QR</h3>
+              <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: '1.6', marginBottom: '20px' }}>
+                Use this high-resolution QR code for printed posters, flyers, and social media announcements. It directs users straight to the talent portal lander.
+              </p>
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <span style={{ 
+                  backgroundColor: 'rgba(197, 160, 89, 0.1)', 
+                  color: 'var(--theatre-gold)', 
+                  padding: '6px 12px', 
+                  borderRadius: '4px', 
+                  fontSize: '0.8rem' 
+                }}>
+                  Branded with Logo
+                </span>
+                <span style={{ 
+                  backgroundColor: 'rgba(255,255,255,0.05)', 
+                  color: '#fff', 
+                  padding: '6px 12px', 
+                  borderRadius: '4px', 
+                  fontSize: '0.8rem' 
+                }}>
+                  300x300 PNG
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Filters & Actions */}
         <div style={{ 
           display: 'flex', 
@@ -311,7 +360,7 @@ export default function AdminDashboard() {
             <div style={{ position: 'relative', flex: 1, maxWidth: '400px' }}>
               <Search style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.3)' }} size={18} />
               <input 
-                placeholder="Search by name, email or reg no..."
+                placeholder="Search by name, phone or reg no..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 style={{
@@ -397,7 +446,7 @@ export default function AdminDashboard() {
                       </td>
                       <td style={{ padding: '16px 20px' }}>
                         <div style={{ color: '#fff', fontWeight: 500 }}>{p.name}</div>
-                        <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.75rem' }}>{p.email}</div>
+                        <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.75rem' }}>{p.phone}</div>
                       </td>
                       <td style={{ padding: '16px 20px' }}>
                         <span style={{ 

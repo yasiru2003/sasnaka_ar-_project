@@ -6,19 +6,20 @@ import Modal from './Modal';
 interface RegistrationModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onUploadNow: (email: string) => void;
+  onUploadNow: (phone: string) => void;
 }
 
 const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen, onClose, onUploadNow }) => {
   const [formData, setFormData] = useState({
     registrationNumber: '',
     name: '',
-    email: '',
+    phone: '',
     district: '',
     category: 'Traditional Dance'
   });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [assignedRegNo, setAssignedRegNo] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -39,6 +40,7 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen, onClose, 
         throw new Error(data.error || 'Failed to register');
       }
       
+      setAssignedRegNo(data.registrationNumber);
       setSuccess(true);
     } catch (err: any) {
       setError(err.message);
@@ -87,13 +89,23 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen, onClose, 
         <div style={{ textAlign: 'center', padding: '20px 0' }}>
           <div style={{ fontSize: '3.5rem', marginBottom: '20px' }}>✨</div>
           <h3 style={{ color: 'var(--theatre-gold)', marginBottom: '10px', fontSize: '1.5rem' }}>Registration Successful!</h3>
-          <p style={{ color: 'rgba(255, 255, 255, 0.7)', marginBottom: '30px' }}>
-            Would you like to upload your talent entry video now, or do it later?
+           <div style={{ 
+            backgroundColor: 'rgba(197, 160, 89, 0.1)', 
+            padding: '15px', 
+            borderRadius: '8px', 
+            border: '1px dashed var(--theatre-gold)',
+            marginBottom: '20px'
+          }}>
+            <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.8rem', textTransform: 'uppercase', marginBottom: '5px' }}>Your Assigned Registration No:</p>
+            <p style={{ color: 'var(--theatre-gold)', fontSize: '1.8rem', fontWeight: '900', letterSpacing: '0.1em' }}>{assignedRegNo}</p>
+          </div>
+          <p style={{ color: 'rgba(255, 255, 255, 0.7)', marginBottom: '30px', fontSize: '0.9rem' }}>
+            Please **save this number**. You will need it along with your phone number to upload your talent video.
           </p>
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
             <button
-              onClick={() => onUploadNow(formData.email)}
+              onClick={() => onUploadNow(formData.phone)}
               style={{
                 ...buttonStyle,
                 backgroundColor: 'var(--theatre-gold)',
@@ -126,7 +138,7 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen, onClose, 
             </button>
           </div>
           <p style={{ color: 'rgba(255, 255, 255, 0.4)', fontSize: '0.8rem', marginTop: '20px' }}>
-            Note: You can always login later using your email to upload.
+            Note: You can always login later using your phone number to upload.
           </p>
         </div>
       ) : (
@@ -145,19 +157,6 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen, onClose, 
             </div>
           )}
           <div>
-            <label style={labelStyle}>Registration Number (e.g. G/001)</label>
-            <input
-              type="text"
-              required
-              placeholder="Assigned at on-ground stall"
-              style={inputStyle}
-              value={formData.registrationNumber}
-              onChange={(e) => setFormData({ ...formData, registrationNumber: e.target.value })}
-              onFocus={(e) => e.target.style.borderColor = 'var(--theatre-gold)'}
-              onBlur={(e) => e.target.style.borderColor = 'rgba(197, 160, 89, 0.3)'}
-            />
-          </div>
-          <div>
             <label style={labelStyle}>Full Name</label>
             <input
               type="text"
@@ -170,14 +169,15 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen, onClose, 
             />
           </div>
 
-          <div>
-            <label style={labelStyle}>Email Address</label>
+           <div>
+            <label style={labelStyle}>Phone Number</label>
             <input
-              type="email"
+              type="tel"
               required
+              placeholder="e.g. 0771234567"
               style={inputStyle}
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              value={formData.phone}
+              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
               onFocus={(e) => e.target.style.borderColor = 'var(--theatre-gold)'}
               onBlur={(e) => e.target.style.borderColor = 'rgba(197, 160, 89, 0.3)'}
             />

@@ -9,14 +9,14 @@ import DetailsModal from '@/components/DetailsModal';
 
 export default function Home() {
   const [activeModal, setActiveModal] = useState<'details' | 'register' | 'upload' | null>(null);
-  const [prefilledEmail, setPrefilledEmail] = useState('');
+  const [prefilledPhone, setPrefilledPhone] = useState('');
 
   const handleRegisterFromDetails = () => {
     setActiveModal('register');
   };
 
-  const handleUploadNow = (email: string) => {
-    setPrefilledEmail(email);
+  const handleUploadNow = (phone: string) => {
+    setPrefilledPhone(phone);
     setActiveModal('upload');
   };
 
@@ -160,7 +160,7 @@ export default function Home() {
             </button>
             <button 
               onClick={() => {
-                setPrefilledEmail('');
+                setPrefilledPhone('');
                 setActiveModal('upload');
               }}
               style={{
@@ -211,7 +211,7 @@ export default function Home() {
           <UploadModal 
             isOpen={true} 
             onClose={() => setActiveModal(null)} 
-            initialEmail={prefilledEmail}
+            initialPhone={prefilledPhone}
           />
         )}
       </AnimatePresence>

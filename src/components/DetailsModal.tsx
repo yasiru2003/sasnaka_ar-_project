@@ -101,7 +101,7 @@ const DetailsModal: React.FC<DetailsModalProps> = ({ isOpen, onClose, onRegister
             <CategoryCard icon={User} title="Contemporary Dance & Drama" description="Modern dance, ballet, acting, or theatrical sketches." index={1} />
             <CategoryCard icon={Mic2} title="Vocal" description="Solo or group singing performances across all genres." index={2} />
             <CategoryCard icon={Music} title="Instruments" description="Showcase your mastery over any musical instrument." index={3} />
-            <CategoryCard icon={BookOpen} title="Registration" description="Get your Reg No on-ground | Register online | Upload later." index={4} />
+            <CategoryCard icon={BookOpen} title="Registration" description="Register online | Get your assigned ID | Upload later." index={4} />
           </div>
         </motion.div>
 

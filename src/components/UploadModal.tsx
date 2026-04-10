@@ -6,12 +6,13 @@ import Modal from './Modal';
 interface UploadModalProps {
   isOpen: boolean;
   onClose: () => void;
-  initialEmail?: string;
+  initialPhone?: string;
 }
 
-const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, initialEmail = '' }) => {
+const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, initialPhone = '' }) => {
   const [formData, setFormData] = useState({
     registrationNumber: '',
+    phone: initialPhone,
     videoUrl: ''
   });
   const [loading, setLoading] = useState(false);
@@ -30,6 +31,7 @@ const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, initialEmail
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           registrationNumber: formData.registrationNumber,
+          phone: formData.phone,
           videoUrl: formData.videoUrl
         })
       });
@@ -106,6 +108,20 @@ const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, initialEmail
               {error}
             </div>
           )}
+
+          <div>
+            <label style={labelStyle}>Phone Number</label>
+            <input
+              type="tel"
+              required
+              style={inputStyle}
+              placeholder="e.g. 0771234567"
+              value={formData.phone}
+              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+              onFocus={(e) => e.target.style.borderColor = 'var(--theatre-gold)'}
+              onBlur={(e) => e.target.style.borderColor = 'rgba(197, 160, 89, 0.3)'}
+            />
+          </div>
 
           <div>
             <label style={labelStyle}>Registration Number</label>

@@ -3,20 +3,23 @@ import { prisma } from '@/lib/prisma';
 
 export async function POST(req: Request) {
   try {
-    const { registrationNumber, name, email, district, category } = await req.json();
+    const { registrationNumber: providedRegNo, name, phone, district, category } = await req.json();
 
-    if (!registrationNumber || !name || !email || !district || !category) {
+    if (!name || !phone || !district || !category) {
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
       );
     }
 
+    // Auto-generate registration number if not provided by stall
+    const registrationNumber = providedRegNo || `S-${Math.floor(1000 + Math.random() * 9000)}`;
+
     const participant = await prisma.participant.create({
       data: {
         registrationNumber,
         name,
-        email,
+        phone,
         district,
         category,
       },

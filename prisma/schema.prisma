@@ -10,7 +10,7 @@ model Participant {
   id                 String   @id @default(uuid())
   registrationNumber String   @unique
   name               String
-  email              String   @unique
+  phone              String   @unique
   district           String
   category           String
   entry_video_url    String?
