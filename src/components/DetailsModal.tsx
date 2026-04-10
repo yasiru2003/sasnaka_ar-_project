@@ -105,39 +105,6 @@ const DetailsModal: React.FC<DetailsModalProps> = ({ isOpen, onClose, onRegister
           </div>
         </motion.div>
 
-        <motion.div variants={itemVariants} style={{ marginBottom: '32px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-            <Star size={18} color="var(--theatre-gold)" />
-            <h3 style={{ color: 'var(--theatre-gold)', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '0.15em', margin: 0 }}>
-              Event Objectives
-            </h3>
-          </div>
-          <ul style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.9rem', paddingLeft: '20px', lineHeight: '1.6' }}>
-            <li>Promote Zentage across all districts and create early awareness.</li>
-            <li>Collect performer registrations in a structured and digital manner.</li>
-            <li>Ensure organized island-wide participation for Zentage 2026.</li>
-          </ul>
-        </motion.div>
-
-        <motion.div variants={itemVariants} style={{ marginBottom: '32px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-            <Award size={18} color="var(--theatre-gold)" />
-            <h3 style={{ color: 'var(--theatre-gold)', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '0.15em', margin: 0 }}>
-              Execution Plan
-            </h3>
-          </div>
-          <div style={{ 
-            backgroundColor: 'rgba(197, 160, 89, 0.05)', 
-            padding: '20px', 
-            borderRadius: '12px',
-            border: '1px dashed rgba(197, 160, 89, 0.3)'
-          }}>
-            <p style={{ color: '#fff', fontSize: '0.9rem', marginBottom: '10px', fontWeight: 'bold' }}>Road to Zentage Registration Stall</p>
-            <p style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.85rem', lineHeight: '1.5' }}>
-              Visit our dedicated stall at any <span style={{ color: 'var(--theatre-gold)' }}>Sasnaka Ape Awurudu</span> event to receive your unique Registration Number (e.g., G/001) from the organizing committee before completing your online portal entry.
-            </p>
-          </div>
-        </motion.div>
       </motion.div>
 
       <motion.button

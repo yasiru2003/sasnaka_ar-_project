@@ -66,7 +66,7 @@ export default function Home() {
               fontWeight: 300
             }}
           >
-            Road to Zentage
+            Sasnaka Sansada Talent Show
           </motion.h2>
 
           <motion.h1
