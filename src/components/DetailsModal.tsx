@@ -101,13 +101,14 @@ const DetailsModal: React.FC<DetailsModalProps> = ({ isOpen, onClose, onRegister
           </div>
         </motion.div>
 
-        <motion.div variants={itemVariants} style={{ marginTop: '24px', textAlign: 'center' }}>
-          <p style={{ color: 'rgba(255, 255, 255, 0.5)', fontSize: '0.85rem' }}>
-            For more details, contact: 
-            <span style={{ color: 'var(--theatre-gold)', fontWeight: 'bold', marginLeft: '8px' }}>077 492 2432</span>
-          </p>
-        </motion.div>
       </motion.div>
+
+      <div style={{ marginTop: '20px', textAlign: 'center' }}>
+        <p style={{ color: 'rgba(255, 255, 255, 0.5)', fontSize: '0.85rem' }}>
+          For more details, contact: 
+          <span style={{ color: 'var(--theatre-gold)', fontWeight: 'bold', marginLeft: '10px', fontSize: '1rem' }}>077 492 2432</span>
+        </p>
+      </div>
 
       <motion.button
         whileHover={{ scale: 1.02, boxShadow: '0 0 30px rgba(197, 160, 89, 0.4)' }}
@@ -125,7 +126,7 @@ const DetailsModal: React.FC<DetailsModalProps> = ({ isOpen, onClose, onRegister
           textTransform: 'uppercase',
           letterSpacing: '0.2em',
           cursor: 'pointer',
-          marginTop: '20px',
+          marginTop: '15px',
           boxShadow: '0 10px 20px rgba(0,0,0,0.3)'
         }}
       >
