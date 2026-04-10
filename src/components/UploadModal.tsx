@@ -11,7 +11,7 @@ interface UploadModalProps {
 
 const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, initialEmail = '' }) => {
   const [formData, setFormData] = useState({
-    email: initialEmail,
+    registrationNumber: '',
     videoUrl: ''
   });
   const [loading, setLoading] = useState(false);
@@ -29,7 +29,7 @@ const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, initialEmail
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          email: formData.email,
+          registrationNumber: formData.registrationNumber,
           videoUrl: formData.videoUrl
         })
       });
@@ -90,7 +90,7 @@ const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, initialEmail
             marginBottom: '20px',
             textAlign: 'center' 
           }}>
-            Please provide your registration email so we can link your video entry.
+            Please provide your assigned Registration Number (e.g., G/001) to link your video entry.
           </p>
           
           {error && (
@@ -108,14 +108,14 @@ const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, initialEmail
           )}
 
           <div>
-            <label style={labelStyle}>Registration Email</label>
+            <label style={labelStyle}>Registration Number</label>
             <input
-              type="email"
+              type="text"
               required
               style={inputStyle}
-              placeholder="your@email.com"
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              placeholder="e.g. G/001"
+              value={formData.registrationNumber}
+              onChange={(e) => setFormData({ ...formData, registrationNumber: e.target.value })}
               onFocus={(e) => e.target.style.borderColor = 'var(--theatre-gold)'}
               onBlur={(e) => e.target.style.borderColor = 'rgba(197, 160, 89, 0.3)'}
             />

@@ -11,9 +11,11 @@ interface RegistrationModalProps {
 
 const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen, onClose, onUploadNow }) => {
   const [formData, setFormData] = useState({
+    registrationNumber: '',
     name: '',
     email: '',
-    category: 'Singing'
+    district: '',
+    category: 'Traditional Dance'
   });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -143,6 +145,19 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen, onClose, 
             </div>
           )}
           <div>
+            <label style={labelStyle}>Registration Number (e.g. G/001)</label>
+            <input
+              type="text"
+              required
+              placeholder="Assigned at on-ground stall"
+              style={inputStyle}
+              value={formData.registrationNumber}
+              onChange={(e) => setFormData({ ...formData, registrationNumber: e.target.value })}
+              onFocus={(e) => e.target.style.borderColor = 'var(--theatre-gold)'}
+              onBlur={(e) => e.target.style.borderColor = 'rgba(197, 160, 89, 0.3)'}
+            />
+          </div>
+          <div>
             <label style={labelStyle}>Full Name</label>
             <input
               type="text"
@@ -169,7 +184,24 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen, onClose, 
           </div>
 
           <div>
-            <label style={labelStyle}>Category</label>
+            <label style={labelStyle}>District</label>
+            <select
+              required
+              style={inputStyle}
+              value={formData.district}
+              onChange={(e) => setFormData({ ...formData, district: e.target.value })}
+              onFocus={(e) => e.target.style.borderColor = 'var(--theatre-gold)'}
+              onBlur={(e) => e.target.style.borderColor = 'rgba(197, 160, 89, 0.3)'}
+            >
+              <option value="" disabled style={{ backgroundColor: '#1a1a1a', color: '#fff' }}>Select District</option>
+              {["Ampara", "Anuradhapura", "Badulla", "Batticaloa", "Colombo", "Galle", "Gampaha", "Hambantota", "Jaffna", "Kalutara", "Kandy", "Kegalle", "Kilinochchi", "Kurunegala", "Mannar", "Matale", "Matara", "Moneragala", "Mullaitivu", "Nuwara Eliya", "Polonnaruwa", "Puttalam", "Ratnapura", "Trincomalee", "Vavuniya"].map(d => (
+                <option key={d} value={d} style={{ backgroundColor: '#1a1a1a', color: '#fff' }}>{d}</option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label style={labelStyle}>Performance Category</label>
             <select
               style={inputStyle}
               value={formData.category}
@@ -177,11 +209,11 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({ isOpen, onClose, 
               onFocus={(e) => e.target.style.borderColor = 'var(--theatre-gold)'}
               onBlur={(e) => e.target.style.borderColor = 'rgba(197, 160, 89, 0.3)'}
             >
-              <option value="Singing">Singing</option>
-              <option value="Dancing">Dancing</option>
-              <option value="Acting">Acting</option>
-              <option value="Instrumental">Instrumental</option>
-              <option value="Other">Other</option>
+              <option value="Traditional Dance" style={{ backgroundColor: '#1a1a1a', color: '#fff' }}>Traditional Dance</option>
+              <option value="Contemporary Dance & Drama" style={{ backgroundColor: '#1a1a1a', color: '#fff' }}>Contemporary Dance & Drama</option>
+              <option value="Vocal" style={{ backgroundColor: '#1a1a1a', color: '#fff' }}>Vocal</option>
+              <option value="Instruments" style={{ backgroundColor: '#1a1a1a', color: '#fff' }}>Instruments</option>
+              <option value="Other" style={{ backgroundColor: '#1a1a1a', color: '#fff' }}>Other</option>
             </select>
           </div>
 

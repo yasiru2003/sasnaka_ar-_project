@@ -20,8 +20,8 @@ const Curtains: React.FC<CurtainsProps> = ({ isOpening }) => {
           skewX: isOpening ? -5 : 0 
         }}
         transition={{ 
-          delay: 2, 
-          duration: 3, 
+          delay: 0.5, 
+          duration: 1.5, 
           ease: [0.45, 0, 0.55, 1], // Custom cubic-bezier for "heavy" feel
         }}
         style={{
@@ -62,8 +62,8 @@ const Curtains: React.FC<CurtainsProps> = ({ isOpening }) => {
           skewX: isOpening ? 5 : 0
         }}
         transition={{ 
-          delay: 2, 
-          duration: 3, 
+          delay: 0.5, 
+          duration: 1.5, 
           ease: [0.45, 0, 0.55, 1],
         }}
         style={{

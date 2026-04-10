@@ -13,11 +13,11 @@ const Theatre: React.FC<TheatreProps> = ({ children }) => {
   const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
-    // Stage 1: Fade in from black (0-2s)
-    const startTimeout = setTimeout(() => setIsStarted(true), 1000);
+    // Stage 1: Fade in from black (0.5s)
+    const startTimeout = setTimeout(() => setIsStarted(true), 500);
     
-    // Stage 4: Content fades in (6s)
-    const contentTimeout = setTimeout(() => setShowContent(true), 6000);
+    // Stage 4: Content fades in (2s)
+    const contentTimeout = setTimeout(() => setShowContent(true), 2000);
 
     return () => {
       clearTimeout(startTimeout);
@@ -47,7 +47,7 @@ const Theatre: React.FC<TheatreProps> = ({ children }) => {
       <motion.div 
         initial={{ opacity: 1 }}
         animate={{ opacity: 0 }}
-        transition={{ duration: 2, ease: "easeInOut" }}
+        transition={{ duration: 1, ease: "easeInOut" }}
         style={{ 
           position: 'absolute', 
           inset: 0, 
@@ -63,7 +63,7 @@ const Theatre: React.FC<TheatreProps> = ({ children }) => {
           <motion.div 
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 3, duration: 2, ease: "easeOut" }}
+            transition={{ delay: 0.5, duration: 1, ease: "easeOut" }}
             className="spotlight"
           />
         )}

@@ -32,7 +32,7 @@ export default function Home() {
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 6.5, duration: 1 }}
+            transition={{ delay: 2.2, duration: 0.8 }}
             style={{
               width: 'min(180px, 45vw)', // Smaller logo on mobile
               height: 'auto',
@@ -56,7 +56,7 @@ export default function Home() {
           <motion.h2
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 7, duration: 0.8 }}
+            transition={{ delay: 2.4, duration: 0.8 }}
             style={{
               fontSize: '1.2rem',
               letterSpacing: '0.4em',
@@ -66,13 +66,13 @@ export default function Home() {
               fontWeight: 300
             }}
           >
-            Welcome to the Official Registration Portal
+            Road to Zentage
           </motion.h2>
 
           <motion.h1
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 7.2, duration: 0.8 }}
+            transition={{ delay: 2.6, duration: 0.8 }}
             style={{
               fontSize: 'clamp(2.5rem, 8vw, 4.5rem)',
               fontWeight: 800,
@@ -84,13 +84,13 @@ export default function Home() {
               textShadow: '0 10px 30px rgba(0,0,0,0.5)'
             }}
           >
-            SASNAKA SANSADA <br /> TALENT SHOW
+            ZENTAGE 2026 <br /> <span style={{ fontSize: '0.5em', letterSpacing: '0.3em', opacity: 0.8 }}>SASNAKA SANSADA TALENT SHOW</span>
           </motion.h1>
 
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 7.5, duration: 0.8 }}
+            transition={{ delay: 2.8, duration: 0.8 }}
             style={{
               display: 'flex',
               gap: '15px',

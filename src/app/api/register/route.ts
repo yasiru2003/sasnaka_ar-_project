@@ -3,9 +3,9 @@ import { prisma } from '@/lib/prisma';
 
 export async function POST(req: Request) {
   try {
-    const { name, email, category } = await req.json();
+    const { registrationNumber, name, email, district, category } = await req.json();
 
-    if (!name || !email || !category) {
+    if (!registrationNumber || !name || !email || !district || !category) {
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
@@ -14,8 +14,10 @@ export async function POST(req: Request) {
 
     const participant = await prisma.participant.create({
       data: {
+        registrationNumber,
         name,
         email,
+        district,
         category,
       },
     });
@@ -23,8 +25,9 @@ export async function POST(req: Request) {
     return NextResponse.json(participant);
   } catch (error: any) {
     if (error.code === 'P2002') {
+      const field = error.meta?.target?.[0] || 'account';
       return NextResponse.json(
-        { error: 'Email already registered' },
+        { error: `This ${field} is already registered` },
         { status: 400 }
       );
     }

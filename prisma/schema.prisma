@@ -7,10 +7,12 @@ datasource db {
 }
 
 model Participant {
-  id              String   @id @default(uuid())
-  name            String
-  email           String   @unique
-  category        String
-  entry_video_url String?
-  created_at      DateTime @default(now())
+  id                 String   @id @default(uuid())
+  registrationNumber String   @unique
+  name               String
+  email              String   @unique
+  district           String
+  category           String
+  entry_video_url    String?
+  created_at         DateTime @default(now())
 }

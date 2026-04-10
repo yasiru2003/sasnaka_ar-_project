@@ -3,9 +3,9 @@ import { prisma } from '@/lib/prisma';
 
 export async function POST(req: Request) {
   try {
-    const { email, videoUrl } = await req.json();
+    const { registrationNumber, videoUrl } = await req.json();
 
-    if (!email || !videoUrl) {
+    if (!registrationNumber || !videoUrl) {
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     }
 
     const participant = await prisma.participant.update({
-      where: { email },
+      where: { registrationNumber },
       data: {
         entry_video_url: videoUrl,
       },
