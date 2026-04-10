@@ -96,15 +96,15 @@ const DetailsModal: React.FC<DetailsModalProps> = ({ isOpen, onClose, onRegister
               Performance Categories
             </h3>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '12px' }}>
-            <CategoryCard icon={Accessibility} title="Traditional Dance" description="Solo or group traditional Sri Lankan dance acts." index={0} />
-            <CategoryCard icon={User} title="Contemporary Dance & Drama" description="Modern dance, ballet, acting, or theatrical sketches." index={1} />
-            <CategoryCard icon={Mic2} title="Vocal" description="Solo or group singing performances across all genres." index={2} />
-            <CategoryCard icon={Music} title="Instruments" description="Showcase your mastery over any musical instrument." index={3} />
-            <CategoryCard icon={BookOpen} title="Registration" description="Register online | Get your assigned ID | Upload later." index={4} />
           </div>
         </motion.div>
 
+        <motion.div variants={itemVariants} style={{ marginTop: '24px', textAlign: 'center' }}>
+          <p style={{ color: 'rgba(255, 255, 255, 0.5)', fontSize: '0.85rem' }}>
+            For more details, contact: 
+            <span style={{ color: 'var(--theatre-gold)', fontWeight: 'bold', marginLeft: '8px' }}>077 492 2432</span>
+          </p>
+        </motion.div>
       </motion.div>
 
       <motion.button
