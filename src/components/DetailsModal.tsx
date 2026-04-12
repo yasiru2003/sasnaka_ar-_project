@@ -104,9 +104,29 @@ const DetailsModal: React.FC<DetailsModalProps> = ({ isOpen, onClose, onRegister
       </motion.div>
 
       <div style={{ marginTop: '20px', textAlign: 'center' }}>
-        <p style={{ color: 'rgba(255, 255, 255, 0.5)', fontSize: '0.85rem' }}>
+        <p style={{ 
+          color: 'rgba(255, 255, 255, 0.5)', 
+          fontSize: '0.85rem',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '5px'
+        }}>
           For more details, contact: 
-          <span style={{ color: 'var(--theatre-gold)', fontWeight: 'bold', marginLeft: '10px', fontSize: '1rem' }}>077 492 2432</span>
+          <a 
+            href="tel:+94771768769" 
+            style={{ 
+              color: 'var(--theatre-gold)', 
+              fontWeight: 'bold', 
+              fontSize: '1.2rem',
+              textDecoration: 'none',
+              transition: 'transform 0.2s'
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
+            onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+          >
+            077 176 8769
+          </a>
         </p>
       </div>
 
